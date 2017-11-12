@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="simple-slider.css" />
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <!-- http://rangeslider.js.org/ -->
+    <script src="https://cdn.jsdelivr.net/rangeslider.js/2.3.0/rangeslider.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row text-center">
+        <h2>Bootstrap Pricing Slider Fully Touch Compatible</h2>
+        <hr>
+        <span class="h1" id="amount-label">
+          <span class="pricing__dollar">€</span>
+        </span>
+        <div class="row slider-container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <input id="range-slider" type="range" min="0" max="100" step="10" value="0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../src/track-user-actions.js"></script>
+    <script src="simple-slider.js"></script>
+  </body>
+</html>

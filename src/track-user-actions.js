@@ -57,8 +57,7 @@
   /**
    * Merge initials with options
    * @private
-   * @param {Object} default settings
-   * @param {Object} user options
+   * @param {Object} default settings + user options
    * @returns {Object} merged object
   */
   function getSettings(initials, options){
@@ -209,7 +208,7 @@
         helperActions.keyLog();
       }
 
-      // Event Listener to porcess
+      // Event Listener to process
       if(settings.actionItem.processOnAction){
         var node = document.querySelector(settings.actionItem.selector);
         if(!!!node) throw new Error('Selector was not found.');
