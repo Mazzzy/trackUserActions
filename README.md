@@ -10,9 +10,13 @@ A pure javascript based plugin that tracks user behavior  events in any given pa
 
 # Usage : 
 Include it as :
+
   ``` <script src="track-user-actions.js"></script> ```
+
 Start the plugin as : 
+
   ``` trackUser.start(); ```
+  
 For above by default options are applied.
 
 You can apply custom options as :

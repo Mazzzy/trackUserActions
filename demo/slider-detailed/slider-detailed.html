@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="slider-detailed.css" />
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  </head>
+  <body>
+    <div class="price-box">
+
+      <form class="form-horizontal form-pricing" role="form">
+
+        <div class="price-slider">
+          <h4 class="great">Amount</h4>
+          <span>Minimum $10 is required</span>
+          <div class="col-sm-12">
+           <div id="slider"></div>
+          </div>
+        </div>
+        <div class="price-slider">
+          <h4 class="great">Duration</h4>
+          <span>Minimum 1 day is required</span>
+          <div class="col-sm-12">
+            <div id="slider2"></div>
+          </div>
+        </div>
+
+        <div class="price-form">
+
+          <div class="form-group">
+            <label for="amount" class="col-sm-6 control-label">Amount ($): </label>
+            <span class="help-text">Please choose your amount</span>
+            <div class="col-sm-6">
+              <input type="hidden" id="amount" class="form-control">
+              <p class="price lead" id="amount-label"></p>
+              <span class="price">.00</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="duration" class="col-sm-6 control-label">Duration: </label>
+            <span class="help-text">Choose your commitment</span>
+            <div class="col-sm-6">
+              <input type="hidden" id="duration" class="form-control">
+              <p class="price lead" id="duration-label"></p>
+              <span class="price">days</span>
+            </div>
+          </div>
+          <hr class="style">
+          <div class="form-group total">
+            <label for="total" class="col-sm-6 control-label"><strong>Total: </strong></label>
+            <span class="help-text">(Amount * Days)</span>
+            <div class="col-sm-6">
+              <input type="hidden" id="total" class="form-control">
+              <p class="price lead" id="total-label"></p>
+              <span class="price">.00</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button id="proceed-btn" type="button" class="btn btn-primary btn-lg btn-block">Proceed <span class="glyphicon glyphicon-chevron-right pull-right" ></span></button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <img src="http://amirolahmad.github.io/bootstrap-pricing-slider/images/payment.png" class="img-responsive payment" />
+          </div>
+        </div>
+
+      </form>
+
+        
+    </div>
+    <script src="../../src/track-user-actions.min.js"></script>
+    <script src="slider-detailed.js"></script>
+  </body>
+</html>
