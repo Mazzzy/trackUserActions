@@ -71,7 +71,154 @@
     return initials;
   }
 
+  // Helper Functions
+  var helperActions = {
+    /**
+     * Set the timer interval, will increment time on page if the user is
+     * active on the page, totalTime counter always increments
+     * @private
+     */
+    timer: function(){
+      window.setInterval(function(){
+        if(document['visibilityState'] === 'visible'){
+          endResult.time.timeOnPage++;
+        }
+        endResult.time.totalTime++;
+      },1000);
+    },
+
+    /**
+     * Detect the X,Y coordinates of the mouse movement
+     * @private
+     */
+    mouseMovement: function(){
+      document.addEventListener('mousemove', function(){
+        endResult.mouseMovements.push({
+          timestamp: Date.now(),
+          x: event.pageX,
+          y: event.pageY
+        });
+      });
+    },
+
+    /**
+     * Check if the user is navigating to a different page
+     * @private
+     */
+    contextChange: function(){
+      document.addEventListener('visibilitychange', function(){
+        endResult.contextChange.push({
+          timestamp: Date.now(),
+          type: document['visibilityState']
+        });
+      });
+    },
+
+    /**
+     * Log the pasted information and keys pressed
+     * @private
+     */
+    keyLog: function(){
+      document.addEventListener('paste', function(){
+        var pastedText = undefined;
+        // Get Pasted Text
+        if (window.clipboardData && window.clipboardData.getData) {
+          pastedText = window.clipboardData.getData('Text');
+        } else if (event.clipboardData && event.clipboardData.getData) {
+          pastedText = event.clipboardData.getData('text/plain');
+        }
+
+        if(!!pastedText){
+          endResult.keyLog.push({
+            timestamp: Date.now(),
+            data: pastedText,
+            type: 'paste'
+          });
+        }
+      });
+      
+      document.addEventListener('keyup', function(){
+        var charCode    = event.keyCode || event.which,
+            charString  = String.fromCharCode(charCode);
+
+        endResult.keyLog.push({
+          timestamp: Date.now(),
+          data: charString,
+          type: 'keypress'
+        });
+      });
+    }
+  };
   
+  // start the operations
+  /**
+   * Start the event listeners
+   * @public
+   * @param {Object} user options
+   */
+  function start(options){
+    if(!support) return;
+
+    // Extend default options
+    if (options && typeof options === "object") {
+      settings = getSettings(initials, options);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Countdown Timer
+      window.setInterval(function(){
+        if(document['visibilityState'] === 'visible'){
+          endResult.time.timeOnPage++;
+        }
+        endResult.time.totalTime++;
+        // Check if we need to process endResult
+        if(settings.processTime > 0 && endResult.time.totalTime % settings.processTime === 0){
+          processEndResults();
+        }
+      },1000);
+
+      // Click registration, increment click counter and save click time+position
+      if(settings.clickCount || settings.clickDetails){
+        document.addEventListener('mouseup', function(){
+          if(settings.clickCount){
+            endResult.clicks.clickCount++;
+          }
+          if(settings.clickDetails){
+            endResult.clicks.clickDetails.push({
+              timestamp: Date.now(),
+              node: event.target.outerHTML,
+              x: event.pageX,
+              y: event.pageY
+            });
+          }
+        });
+      }
+
+      // Mouse movements
+      if(settings.mouseMovement){
+        helperActions.mouseMovement();
+      }
+
+      // Check context change
+      if(settings.context){
+        helperActions.contextChange();
+      }
+
+      // Key Logger
+      if(settings.keyLog){
+        helperActions.keyLog();
+      }
+
+      // Event Listener to porcess
+      if(settings.actionItem.processOnAction){
+        var node = document.querySelector(settings.actionItem.selector);
+        if(!!!node) throw new Error('Selector was not found.');
+        node.addEventListener(settings.actionItem.event, function(){
+          return processEndResults();
+        })
+      }
+    });
+  }
 
   // generating endResult
   /**
@@ -87,8 +234,9 @@
 
   // attaching stuffs on namespace
   // only expose necessary methds
+  trackUser.start = start;
   trackUser.processEndResults = processEndResults;
-
+  
   // exporting namespace via window
   window.trackUser = trackUser;
 

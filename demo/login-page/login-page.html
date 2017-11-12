@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="login-page.css" />
+  </head>
+  <body>
+    <div class="container">
+    <h1 class="welcome text-center">Welcome to <br> My site</h1>
+        <div class="card card-container">
+        <h2 class='login_title text-center'>Login</h2>
+        <hr>
+
+            <form class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <p class="input_title">Email</p>
+                <input type="text" id="inputEmail" class="login_box" placeholder="test@test.com" required autofocus>
+                <p class="input_title">Password</p>
+                <input type="password" id="inputPassword" class="login_box" placeholder="******" required>
+                <div id="remember" class="checkbox">
+                    <label>
+                        
+                    </label>
+                </div>
+                <button id="login-btn" class="btn btn-lg btn-primary" type="button">Login</button>
+            </form><!-- /form -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <script src="../../src/track-user-actions.js"></script>
+    <script src="login-page.js"></script>
+  </body>
+</html>
